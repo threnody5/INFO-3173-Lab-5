@@ -1,7 +1,8 @@
 import { View, Text, Alert } from 'react-native';
 import { ContactDetails } from '../contact/ContactDetails';
-import { ScreenCSS } from  '../css/ScreenCSS';
+import { ScreenCSS } from '../css/ScreenCSS';
 import Button from './Button';
+import * as SMS from 'expo-sms';
 
 function SMSScreen() {
     return (
@@ -23,8 +24,21 @@ function SMSScreen() {
     )
 }
 
-const SendMessageWithSMS = () => {
-    Alert.alert('SMS has been sent successfully!');
+const SendMessageWithSMS = async () => {
+    const isAvailable = await SMS.isAvailableAsync();
+    const message = 'This is a test text message';
+
+    if (!isAvailable) {
+        Alert.alert('SMS is not available');
+        return;
+    }
+    const { result } = await SMS.sendSMSAsync(
+        [ '1231231234', '2342342345' ],
+        message
+    )
+    if (result) {
+        Alert.alert('SMS has been sent successfully');
+    }
 }
 
 export default SMSScreen;
