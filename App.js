@@ -18,7 +18,6 @@ export default function App() {
           name='Home'
           component={ HomeScreen }
           options={ { title: 'Home', headerTitleAlign: 'center' } }
-
         />
         <Stack.Screen
           name='Email'
