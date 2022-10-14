@@ -15,7 +15,7 @@ const Header = () => {
 const styles = StyleSheet.create({
     container: {
         textTransform: 'uppercase',
-        color: 'black',
+        color: '#33334d',
         fontWeight: 'bold',
         textAlign: 'center',
         paddingTop: 30,
