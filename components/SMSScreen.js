@@ -26,12 +26,12 @@ function SMSScreen() {
 
 const SendMessageWithSMS = async () => {
     const isAvailable = await SMS.isAvailableAsync();
-    const message = `${ ContactDetails.name }  
-                     ${ ContactDetails.address } 
-                     ${ ContactDetails.city } 
-                     ${ ContactDetails.province } 
-                     ${ ContactDetails.phoneNumber } 
-                     ${ ContactDetails.emailAddress }`;
+    const message = `${ContactDetails.name}  
+                     ${ContactDetails.address} 
+                     ${ContactDetails.city} 
+                     ${ContactDetails.province} 
+                     ${ContactDetails.phoneNumber} 
+                     ${ContactDetails.emailAddress}`;
 
     if (!isAvailable) {
         Alert.alert('SMS is not available');
@@ -42,7 +42,7 @@ const SendMessageWithSMS = async () => {
         message
     )
     if (result) {
-        Alert.alert('SMS sent successfully.');
+        Alert.alert('Alert', 'SMS sent successfully.');
         return;
     }
     Alert.alert('Something went wrong, please try again.');
