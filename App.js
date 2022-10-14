@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, Button, TouchableOpacity } from 'react-native';
-import { NavigationContainer, TabActions } from '@react-navigation/native';
+import { NavigationContainer, StackActions, TabActions } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import SendMessageWithSMS from './components/SendMessageWithSMS';
@@ -16,76 +16,49 @@ export default function App() {
       <Stack.Navigator>
         <Stack.Screen
           name='Home'
-          component={ Home }
+          component={ HomeScreen }
+          options={ { title: 'Home' } }
+        />
+        <Stack.Screen
+          name='Email'
+          component={ EmailScreen }
+          options={ { title: 'Send Email' } }
+        />
+        <Stack.Screen
+          name='SMS'
+          component={ SMSScreen }
+          options={ { title: 'Send SMS' } }
         />
       </Stack.Navigator>
     </NavigationContainer>
   )
 
-  function Home() {
-    return (
-      <View>
-        <Header />
-        <View style={ styles.buttonContainer }>
-          {/* <TouchableOpacity activeOpacity={ 0.7 } onPress={ SendMessageWithEmail} /> */}
-          <Button style={ styles.button } title='Email' onPress={ SendMessageWithEmail } />
-        </View>
-        <View>
-          <Button style={ styles.button } title='SMS' onPress={ SendMessageWithSMS } />
-        </View>
-      </View>
-    )
-  }
+}
 
-  // const SendMessageWithEmail = ({ navigation }) => {
-  //   return (
-  //     <Button
-  //       title='Send Email'
-  //       onPress={ () => {
-  //         navigation.navigate(EmailScreen);
-  //       } }
-  //     />
-  //   )
-  // }
+const HomeScreen = ({ navigation }) => {
+  return (
+    <View>
+      <Header />
+      <Button title='EMAIL MY INFO' onPress={ () => { navigation.navigate('Email') } } />
+      <Button title='SMS MY INFO' onPress={ () => { navigation.navigate('SMS') } } />
+    </View>
+  )
+}
 
-  // const EmailScreen = ({ navigation, route }) => {
-  //   return (
-  //     <Text>This is the Email Screen</Text>
-  //   )
-  // }
+const EmailScreen = () => {
+  return (
+    <View>
+      <Text>This is the Email Screen</Text>
+    </View>
+  )
+}
 
-  // const SendMessageWithSMS = ({ navigation }) => {
-  //   return (
-  //     <Button
-  //       title='Send SMS'
-  //       onPress={ () => {
-  //         navigation.navigate('SMS');
-  //       } }
-  //     />
-  //   )
-  // }
-
-
-  // [ message, setMessage ] = useState();
-
-  // onChangeHandler = () => {
-  //   // setMessage(value);
-  //   console.log('works');
-  // }
-
-  // return (
-  //   <View style={ styles.form }>
-  //     <Header />
-  //     <Text style={ styles.label }>Choose how your would like to send your message: </Text>
-  //     <View style={styles.buttonContainer}>
-  //       <SendMessageWithSMS />
-  //         {/* style={ styles.button }
-  //         title='Email'
-  //         onPress={ SendMessageWithEmail } */}
-
-  //     </View>
-  //   </View>
-  // );
+const SMSScreen = () => {
+  return (
+    <View>
+      <Text>This is the SMS Screen</Text>
+    </View>
+  )
 }
 
 const styles = StyleSheet.create({

@@ -3,7 +3,7 @@ import { View, Button, Text } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-function SendMessageWithEmail() {
+const SendMessageWithEmail = ({ navigation }) => {
   <View>
     <Text>Email works!</Text>
   </View>
