@@ -2,6 +2,7 @@ import { View, Text, Alert } from 'react-native';
 import { ContactDetails } from '../contact/ContactDetails';
 import { ScreenCSS } from '../css/ScreenCSS';
 import Button from './Button';
+import * as MailComposer from 'expo-mail-composer';
 
 function EmailScreen() {
     return (
@@ -17,14 +18,34 @@ function EmailScreen() {
                 <Text>{ ContactDetails.emailAddress }</Text>
             </View>
             <View>
-                <Button title='SEND Email' onPress={ SendMessageWithEmail } />
+                <Button title='SEND EMAIL' onPress={ SendMessageWithEmail } />
             </View>
         </View>
     )
 }
 
-const SendMessageWithEmail = () => {
-    Alert.alert('Email has been sent successfully!');
+const SendMessageWithEmail = async () => {
+    const isAvailable = await MailComposer.isAvailableAsync();
+
+    const message = `${ContactDetails.name}
+                     ${ContactDetails.address}
+                     ${ContactDetails.city}
+                     ${ContactDetails.province}
+                     ${ContactDetails.phoneNumber}
+                     ${ContactDetails.emailAddress}`;
+
+    var emailOptions = {
+        recipients: [ 'w_watson156803@fanshaweonline.ca' ],
+        subject: 'Request Contact Details',
+        body: message
+    };
+    if (!isAvailable) {
+        Alert.alert('Email is not available');
+        return;
+    }
+    Alert.alert('Alert', 'Email sent successfully.');
+
+    MailComposer.composeAsync(emailOptions).then((result) => { console.log(result) });
 }
 
 export default EmailScreen;
