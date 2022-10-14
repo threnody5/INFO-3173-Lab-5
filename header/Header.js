@@ -3,7 +3,7 @@ import { View, Text, StyleSheet } from 'react-native';
 
 const Header = () => {
 
-    const displayInfo = 'Send My Info w_watson156803';
+    const displayInfo = 'Send My Info w_watson156803 (Lab_5)';
 
     return (
         <View>
