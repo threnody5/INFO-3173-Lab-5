@@ -26,7 +26,12 @@ function SMSScreen() {
 
 const SendMessageWithSMS = async () => {
     const isAvailable = await SMS.isAvailableAsync();
-    const message = 'This is a test text message';
+    const message = `${ ContactDetails.name }  
+                     ${ ContactDetails.address } 
+                     ${ ContactDetails.city } 
+                     ${ ContactDetails.province } 
+                     ${ ContactDetails.phoneNumber } 
+                     ${ ContactDetails.emailAddress }`;
 
     if (!isAvailable) {
         Alert.alert('SMS is not available');
