@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         textAlign: 'center',
         paddingTop: 30,
-        paddingBottom: 10,
+        paddingBottom: 60,
         fontSize: 30,
         width: '100%'
     }
