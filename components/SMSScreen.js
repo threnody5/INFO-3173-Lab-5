@@ -37,8 +37,10 @@ const SendMessageWithSMS = async () => {
         message
     )
     if (result) {
-        Alert.alert('SMS has been sent successfully');
+        Alert.alert('SMS sent successfully.');
+        return;
     }
+    Alert.alert('Something went wrong, please try again.');
 }
 
 export default SMSScreen;
