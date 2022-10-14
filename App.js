@@ -1,10 +1,7 @@
-import React, { useState } from 'react';
-import { StyleSheet, Text, View, TextInput, Button, TouchableOpacity } from 'react-native';
-import { NavigationContainer, StackActions, TabActions } from '@react-navigation/native';
+import React from 'react';
+import { StyleSheet, Text, View, Button, TouchableOpacity, Alert } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-
-import SendMessageWithSMS from './components/SendMessageWithSMS';
-import SendMessageWithEmail from './components/SendMessageWithEmail';
 import Header from './header/Header';
 
 const Stack = createNativeStackNavigator();
@@ -39,8 +36,10 @@ const HomeScreen = ({ navigation }) => {
   return (
     <View>
       <Header />
-      <Button title='EMAIL MY INFO' onPress={ () => { navigation.navigate('Email') } } />
-      <Button title='SMS MY INFO' onPress={ () => { navigation.navigate('SMS') } } />
+      <View style={styles.buttonContainer}>
+        <Button title='EMAIL MY INFO' color='#80bfff' onPress={ () => { navigation.navigate('Email') } } />
+        <Button title='SMS MY INFO' color='#80bfff' onPress={ () => { navigation.navigate('SMS') } } />
+      </View>
     </View>
   )
 }
@@ -48,7 +47,22 @@ const HomeScreen = ({ navigation }) => {
 const EmailScreen = () => {
   return (
     <View>
-      <Text>This is the Email Screen</Text>
+      <View>
+        <Text>YOU ARE GOING TO SEND THE FOLLOWING INFO:</Text>
+      </View>
+      <View style={ styles.contactList }>
+        <Text style={ styles.contactList }>{ contactDetails.name }</Text>
+        <Text>{ contactDetails.address }</Text>
+        <Text>{ contactDetails.city }, { contactDetails.province }</Text>
+        <Text>{ contactDetails.phoneNumber }</Text>
+        <Text>{ contactDetails.emailAddress }</Text>
+      </View>
+      <View>
+        <Button title='SEND Email' onPress={ SendMessageWithEmail } />
+        {/* <TouchableOpacity activeOpacity={ 0.8 } onPress={ () => { console.log('it works!') } }>
+          <Text color={ styles.buttonText }>Touch Me</Text>
+        </TouchableOpacity> */}
+      </View>
     </View>
   )
 }
@@ -56,12 +70,47 @@ const EmailScreen = () => {
 const SMSScreen = () => {
   return (
     <View>
-      <Text>This is the SMS Screen</Text>
+      <View>
+        <Text>YOU ARE GOING TO SEND THE FOLLOWING INFO:</Text>
+      </View>
+      <View style={ styles.contactList }>
+        <Text style={ styles.contactList }>{ contactDetails.name }</Text>
+        <Text>{ contactDetails.address }</Text>
+        <Text>{ contactDetails.city }, { contactDetails.province }</Text>
+        <Text>{ contactDetails.phoneNumber }</Text>
+        <Text>{ contactDetails.emailAddress }</Text>
+      </View>
+      <View>
+        <Button title='SEND SMS' onPress={ SendMessageWithSMS } />
+        {/* <TouchableOpacity activeOpacity={ 0.8 } onPress={ () => { console.log('it works!') } }>
+        <Text color={ styles.buttonText }>Touch Me</Text>
+      </TouchableOpacity> */}
+      </View>
     </View>
   )
 }
 
+const SendMessageWithEmail = () => {
+  Alert.alert('Email has been sent successfully!');
+}
+
+const SendMessageWithSMS = () => {
+  Alert.alert('SMS has been sent successfully!');
+}
+
+const contactDetails = {
+  name: 'William Watson',
+  address: '654 Main Street',
+  city: 'St Thomas',
+  province: 'ON',
+  phoneNumber: '519-635-1563',
+  emailAddress: 'w_watson156803@fanshaweonline.ca'
+}
+
 const styles = StyleSheet.create({
+  contactList: {
+    textTransform: 'uppercase',
+  },
   form: {
     flex: 1,
     margin: 30,
@@ -87,8 +136,14 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   button: {
-    width: '100%',
-    paddingVertical: 40
+    justifyContent: 'center',
+    width: '70%',
+    paddingVertical: 20,
+    backgroundColor: 'white'
+  },
+  buttonText: {
+    color: 'white',
+    justifyContent: 'center',
   },
   title: {
     textAlign: 'center',
